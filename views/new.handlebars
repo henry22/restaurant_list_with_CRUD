@@ -1,0 +1,57 @@
+<h1 class="restaurant-show-title">餐廳表單填寫</h1>
+
+<form action="/restaurants" method="POST">
+  <div class="container">
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="name">餐廳中文名</label>
+          <input type="text" name="name" class="form-control" required>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="name_en">餐廳英文名</label>
+          <input type="text" name="name_en" class="form-control" required>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group col-md-5">
+          <label for="category">餐廳類別</label>
+          <input type="text" name="category" class="form-control" required>
+        </div>
+        <div class="form-group col-md-5">
+          <label for="phone">餐廳電話</label>
+          <input type="text" name="phone" class="form-control" required>
+        </div>
+        <div class="form-group col-md-2">
+          <label for="rating">餐廳評分</label>
+          <input type="number" placeholder="1~5分" name="rating" class="form-control" step="0.1" min="1" max="5" required>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="location">餐廳地址</label>
+        <input type="text" name="location" class="form-control" required>
+      </div>
+
+      <div class="form-group">
+        <label for="google_map">Google餐廳位置</label>
+        <input type="url" name="google_map" class="form-control" placeholder="請輸入Google餐廳位置" required>
+      </div>
+
+      <div class="form-group">
+        <label for="description">餐廳介紹</label>
+        <textarea type="text" placeholder="請介紹此餐廳特色" name="description" class="form-control" required></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="image">餐廳圖片</label>
+        <input type="url" name="image" class="form-control" placeholder="餐廳圖片網址" required>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group col-auto">
+          <button type="submit" class="btn btn-info">建立</button>
+        </div>
+      </div>
+  </div>
+</form>
