@@ -7,6 +7,7 @@ const bodyParser = require('body-parser')
 
 // Use mongoose to connect to the mongodb server
 mongoose.connect('mongodb://localhost/restaurant', { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.set('useCreateIndex', true)
 
 const db = mongoose.connection
 
@@ -77,16 +78,15 @@ app.post('/restaurants', (req, res) => {
   })
 })
 
-
+// Search keyword
 app.get('/search', (req, res) => {
   const keyword = req.query.keyword
 
-  Restaurant.find((err, restaurants) => {
+  Restaurant.find({ name: { "$regex": keyword, "$options": "i" } },
+    (err, restaurants) => {
     if (err) return console.log(err)
 
-    const filteredRestaurants = restaurants.filter(restaurant => restaurant.name.toLowerCase().includes(keyword.toLowerCase()))
-
-    return res.render('index', { restaurants: filteredRestaurants, keyword: keyword })
+    return res.render('index', { restaurants: restaurants, keyword: keyword })
   })
 })
 

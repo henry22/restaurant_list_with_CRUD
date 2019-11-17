@@ -44,4 +44,6 @@ const restaurantSchema = new Schema({
   }
 })
 
+restaurantSchema.index({name: 'match'})
+
 module.exports = mongoose.model('Restaurant', restaurantSchema)
