@@ -1,0 +1,57 @@
+<h1 class="restaurant-show-title">餐廳表單填寫</h1>
+
+<form action="/restaurants/{{restaurant.id}}/edit" method="POST">
+  <div class="container">
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="name"><i class="fas fa-utensils mr-1"></i>餐廳中文名</label>
+          <input type="text" name="name" class="form-control" value="{{restaurant.name}}" required>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="name_en"><i class="fas fa-utensils mr-1"></i>餐廳英文名</label>
+          <input type="text" name="name_en" class="form-control" value="{{restaurant.name_en}}" required>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group col-md-5">
+          <label for="category"><i class="fas fa-archive mr-1"></i>餐廳類別</label>
+          <input type="text" name="category" class="form-control" value="{{restaurant.category}}" required>
+        </div>
+        <div class="form-group col-md-5">
+          <label for="phone"><i class="fas fa-mobile-alt mr-1"></i>餐廳電話</label>
+          <input type="text" name="phone" class="form-control" value="{{restaurant.phone}}" required>
+        </div>
+        <div class="form-group col-md-2">
+          <label for="rating"><i class="fas fa-star mr-1"></i>餐廳評分</label>
+          <input type="number" placeholder="1~5分" name="rating" class="form-control" step="0.1" min="1" max="5" value="{{restaurant.rating}}" required>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="location"><i class="fas fa-map-marker-alt mr-1"></i>餐廳地址</label>
+        <input type="text" name="location" class="form-control" value="{{restaurant.location}}" required>
+      </div>
+
+      <div class="form-group">
+        <label for="google_map"><i class="fas fa-map mr-1"></i>Google餐廳位置</label>
+        <input type="url" name="google_map" class="form-control" placeholder="{{restaurant.google_map}}" value="https://goo.gl/maps/V9mKwVJ4s5v" required>
+      </div>
+
+      <div class="form-group">
+        <label for="description"><i class="fas fa-sticky-note mr-1"></i>餐廳介紹</label>
+        <textarea type="text" placeholder="請介紹此餐廳特色" name="description" class="form-control" rows="4" required>{{restaurant.description}}</textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="image"><i class="fas fa-image mr-1"></i>餐廳圖片</label>
+        <input type="url" name="image" class="form-control" placeholder="餐廳圖片網址" value="{{restaurant.image}}" required>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group col-auto">
+          <button type="submit" class="btn btn-info">修改</button>
+        </div>
+      </div>
+  </div>
+</form>

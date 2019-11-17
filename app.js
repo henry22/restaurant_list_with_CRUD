@@ -43,7 +43,7 @@ app.get('/restaurants/new', (req, res) => {
   return res.render('new')
 })
 
-// Read one restaurant
+// Restaurant detail page
 app.get('/restaurants/:restaurant_id', (req, res) => {
   const restaurantId = req.params.restaurant_id
 
@@ -51,6 +51,29 @@ app.get('/restaurants/:restaurant_id', (req, res) => {
     if (err) return console.log(err)
 
     return res.render('show', { restaurant: restaurant })
+  })
+})
+
+// Search keyword
+app.get('/search', (req, res) => {
+  const keyword = req.query.keyword
+
+  Restaurant.find({ name: { "$regex": keyword, "$options": "i" } },
+    (err, restaurants) => {
+    if (err) return console.log(err)
+
+    return res.render('index', { restaurants: restaurants, keyword: keyword })
+  })
+})
+
+// Edit restaurant page
+app.get('/restaurants/:restaurant_id/edit', (req, res) => {
+  const restaurantId = req.params.restaurant_id
+
+  Restaurant.findById(restaurantId, (err, restaurant) => {
+    if (err) return console.log(err)
+
+    return res.render('edit', { restaurant: restaurant })
   })
 })
 
@@ -78,15 +101,28 @@ app.post('/restaurants', (req, res) => {
   })
 })
 
-// Search keyword
-app.get('/search', (req, res) => {
-  const keyword = req.query.keyword
+// Update restaurant
+app.post('/restaurants/:restaurant_id/edit', (req, res) => {
+  const restaurantId = req.params.restaurant_id
 
-  Restaurant.find({ name: { "$regex": keyword, "$options": "i" } },
-    (err, restaurants) => {
+  Restaurant.findById(restaurantId, (err, restaurant) => {
     if (err) return console.log(err)
 
-    return res.render('index', { restaurants: restaurants, keyword: keyword })
+    restaurant.name = req.body.name
+    restaurant.name_en = req.body.name_en
+    restaurant.category = req.body.category
+    restaurant.image = req.body.image
+    restaurant.location = req.body.location
+    restaurant.phone = req.body.phone
+    restaurant.google_map = req.body.google_map
+    restaurant.rating = Number(req.body.rating)
+    restaurant.description = req.body.description
+
+    restaurant.save(err => {
+      if (err) return console.log(err)
+
+      return res.redirect(`/restaurants/${restaurantId}`)
+    })
   })
 })
 
