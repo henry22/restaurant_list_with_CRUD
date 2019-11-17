@@ -2,7 +2,16 @@ const express = require('express')
 const app = express()
 const port = 3000
 const expressHandlebars = require('express-handlebars')
-const restaurantList = require('./restaurant.json')
+const restaurantList = require('./models/seeds/restaurant.json')
+const mongoose = require('mongoose')
+
+// Use mongoose to connect to the mongodb server
+mongoose.connect('mongodb://localhost/restaurant', { useNewUrlParser: true, useUnifiedTopology: true })
+
+const db = mongoose.connection
+
+db.on('error', () => console.log('mongodb error'))
+db.once('open', () => console.log('mongodb connected'))
 
 app.engine('handlebars', expressHandlebars({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
