@@ -20,10 +20,13 @@ app.use(express.static('public'))
 app.use(bodyParser.urlencoded({ extended: true }))
 
 const Restaurant = require('./models/restaurant')
+let id = 0
 
 app.get('/', (req, res) => {
   Restaurant.find((err, restaurants) => {
     if (err) return console.log(err)
+
+    id = restaurants.length
 
     return res.render('index', { restaurants: restaurants })
   })
@@ -52,7 +55,25 @@ app.get('/restaurants/:restaurant_id', (req, res) => {
 
 // Create one restaurant
 app.post('/restaurants', (req, res) => {
+  // Create restaurant instance
+  const restaurant = new Restaurant({
+    _id: ++id,
+    name: req.body.name,
+    name_en: req.body.name_en,
+    category: req.body.category,
+    image: req.body.image,
+    location: req.body.location,
+    phone: req.body.phone,
+    google_map: req.body.google_map,
+    rating: Number(req.body.rating),
+    description: req.body.description
+  })
 
+  restaurant.save(err => {
+    if (err) return console.log(err)
+
+    return res.redirect('/')
+  })
 })
 
 
