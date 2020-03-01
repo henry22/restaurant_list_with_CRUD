@@ -4,15 +4,16 @@
 
 ## Installing
 
-#### 環境
+#### NPM的使用
 
 ```
 - node.js v-10.15.0
 - nodemon
 - Express
 - Express-Handlebars
-- body-parse
+- body-parser
 - Mongoose
+- method-override
 
 ```
 
@@ -22,7 +23,7 @@
 
 `git clone https://github.com/henry22/restaurant_list_with_CRUD`
 
-##### 2.初始
+##### 2.初始設定
 
 ```
 1.切換目錄到專案: cd restaurant_list_with_CRUD
