@@ -23,11 +23,13 @@ app.use(bodyParser.urlencoded({ extended: true }))
 const Restaurant = require('./models/restaurant')
 
 app.get('/', (req, res) => {
-  Restaurant.find((err, restaurants) => {
-    if (err) return console.log(err)
+  Restaurant.find()
+    .lean()
+    .exec((err, restaurants) => {
+      if (err) return console.log(err)
 
-    return res.render('index', { restaurants: restaurants })
-  })
+      return res.render('index', { restaurants: restaurants })
+    })
 })
 
 // Read all restaurants
@@ -44,34 +46,39 @@ app.get('/restaurants/new', (req, res) => {
 app.get('/restaurants/:restaurant_id', (req, res) => {
   const restaurantId = req.params.restaurant_id
 
-  Restaurant.findById(restaurantId, (err, restaurant) => {
-    if (err) return console.log(err)
+  Restaurant.findById(restaurantId)
+    .lean()
+    .exec((err, restaurant) => {
+      if (err) return console.log(err)
 
-    return res.render('show', { restaurant: restaurant })
-  })
+      return res.render('show', { restaurant: restaurant })
+    })
 })
 
 // Search keyword
 app.get('/search', (req, res) => {
   const keyword = req.query.keyword
 
-  Restaurant.find({ name: { "$regex": keyword, "$options": "i" } },
-    (err, restaurants) => {
-    if (err) return console.log(err)
+  Restaurant.find({ name: { "$regex": keyword, "$options": "i" } })
+    .lean()
+    .exec((err, restaurants) => {
+      if (err) return console.log(err)
 
-    return res.render('index', { restaurants: restaurants, keyword: keyword })
-  })
+      return res.render('index', { restaurants: restaurants, keyword: keyword })
+    })
 })
 
 // Edit restaurant page
 app.get('/restaurants/:restaurant_id/edit', (req, res) => {
   const restaurantId = req.params.restaurant_id
 
-  Restaurant.findById(restaurantId, (err, restaurant) => {
-    if (err) return console.log(err)
+  Restaurant.findById(restaurantId)
+    .lean()
+    .exec((err, restaurant) => {
+      if (err) return console.log(err)
 
-    return res.render('edit', { restaurant: restaurant })
-  })
+      return res.render('edit', { restaurant: restaurant })
+    })
 })
 
 // Create one restaurant
