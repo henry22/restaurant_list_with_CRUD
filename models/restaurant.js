@@ -2,10 +2,6 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const restaurantSchema = new Schema({
-  number: {
-    type: Number,
-    required: true
-  },
   name: {
     type: String,
     required: true
@@ -43,7 +39,5 @@ const restaurantSchema = new Schema({
     required: true
   }
 })
-
-restaurantSchema.index({name: 'match'})
 
 module.exports = mongoose.model('Restaurant', restaurantSchema)

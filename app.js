@@ -21,13 +21,10 @@ app.use(express.static('public'))
 app.use(bodyParser.urlencoded({ extended: true }))
 
 const Restaurant = require('./models/restaurant')
-let number = 0
 
 app.get('/', (req, res) => {
   Restaurant.find((err, restaurants) => {
     if (err) return console.log(err)
-
-    number = restaurants.length
 
     return res.render('index', { restaurants: restaurants })
   })
@@ -79,10 +76,8 @@ app.get('/restaurants/:restaurant_id/edit', (req, res) => {
 
 // Create one restaurant
 app.post('/restaurants', (req, res) => {
-  number++
   // Create restaurant instance
   const restaurant = new Restaurant({
-    number: number,
     name: req.body.name,
     name_en: req.body.name_en,
     category: req.body.category,
@@ -122,6 +117,21 @@ app.post('/restaurants/:restaurant_id/edit', (req, res) => {
       if (err) return console.log(err)
 
       return res.redirect(`/restaurants/${restaurantId}`)
+    })
+  })
+})
+
+// Delete restaurant
+app.post('/restaurants/:restaurant_id/delete', (req, res) => {
+  const restaurantId = req.params.restaurant_id
+
+  Restaurant.findById(restaurantId, (err, restaurant) => {
+    if (err) return console.log(err)
+
+    restaurant.remove(err => {
+      if (err) return console.log(err)
+
+      return res.redirect('/')
     })
   })
 })
