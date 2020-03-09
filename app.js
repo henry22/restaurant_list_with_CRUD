@@ -28,5 +28,6 @@ const Restaurant = require('./models/restaurant')
 // routes
 app.use('/', require('./routes/home'))
 app.use('/restaurants', require('./routes/restaurant'))
+app.use('/users', require('./routes/user'))
 
 app.listen(port, () => console.log(`The server is listening on port:${port}`))
