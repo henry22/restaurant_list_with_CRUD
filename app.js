@@ -6,6 +6,7 @@ const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 const methodOverride = require('method-override')
 const session = require('express-session')
+const passport = require('passport')
 
 // Use mongoose to connect to the mongodb server
 mongoose.connect('mongodb://localhost/restaurant', { useNewUrlParser: true, useUnifiedTopology: true })
@@ -29,6 +30,12 @@ app.use(session({
   resave: false,
   saveUninitialized: true
 }))
+
+app.use(passport.initialize())
+app.use(passport.session())
+
+// import passport config
+require('./config/passport')(passport)
 
 // routes
 app.use('/', require('./routes/home'))
