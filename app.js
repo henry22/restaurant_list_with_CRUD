@@ -5,6 +5,7 @@ const expressHandlebars = require('express-handlebars')
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 const methodOverride = require('method-override')
+const session = require('express-session')
 
 // Use mongoose to connect to the mongodb server
 mongoose.connect('mongodb://localhost/restaurant', { useNewUrlParser: true, useUnifiedTopology: true })
@@ -23,7 +24,11 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 app.use(methodOverride('_method'))
 
-const Restaurant = require('./models/restaurant')
+app.use(session({
+  secret: 'ac restaurtant list',
+  resave: false,
+  saveUninitialized: true
+}))
 
 // routes
 app.use('/', require('./routes/home'))
