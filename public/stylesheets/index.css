@@ -81,7 +81,12 @@ header {
 
 @media screen and (max-width: 992px) {
   .card img {
-    height: 115px;
+    height: auto;
+  }
+
+  .restaurant-card {
+    min-width: 45% !important;
+    max-width: auto !important;
   }
 }
 
@@ -89,10 +94,20 @@ header {
   .restaurant-show-title {
     font-size: 2rem;
   }
+
+  .restaurant-card {
+    min-width: 100% !important;
+    max-width: auto !important;
+  }
 }
 
 @media screen and (max-width: 575px) {
   .card img {
     height: auto;
+  }
+
+  .restaurant-card {
+    min-width: 100% !important;
+    max-width: auto !important;
   }
 }

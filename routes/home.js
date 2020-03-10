@@ -25,7 +25,7 @@ router.get('/', authenticated, (req, res) => {
       dropdownDisplay = '地區'
       break;
   }
-  Restaurant.find()
+  Restaurant.find({userId: req.user._id})
     .sort(sortingPattern)
     .lean()
     .exec((err, restaurants) => {
