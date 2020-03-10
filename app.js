@@ -9,7 +9,7 @@ const session = require('express-session')
 const passport = require('passport')
 
 // Use mongoose to connect to the mongodb server
-mongoose.connect('mongodb://localhost/restaurant', { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect('mongodb://localhost/restaurant', { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
 mongoose.set('useCreateIndex', true)
 
 const db = mongoose.connection
