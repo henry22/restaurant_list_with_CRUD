@@ -2,8 +2,9 @@
 const express = require('express')
 const router = express.Router()
 const Restaurant = require('../models/restaurant')
+const {authenticated} = require('../config/auth')
 
-router.get('/', (req, res) => {
+router.get('/', authenticated, (req, res) => {
   let dropdownDisplay = '排序'
   let sortingPattern = {}
   switch (req.query.sort) {
