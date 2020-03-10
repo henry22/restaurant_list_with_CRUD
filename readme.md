@@ -14,7 +14,13 @@
 - body-parser
 - Mongoose
 - method-override
-
+- passport
+- passport-local
+- passport-facebook
+- express-session
+- bcryptjs
+- dotenv
+- connect-flash
 ```
 
 ##### 確認本機是否安裝 [Mongodb](https://www.mongodb.com/download-center/community) 、 [Robo 3T](https://robomongo.org/)
@@ -28,9 +34,8 @@
 ```
 1.切換目錄到專案: cd restaurant_list_with_CRUD
 2.安裝套件: npm install
-3.新增種子資料 -終端機上執行 restaurantSeeder.js
-- cd ~ models\seeds
-- node restaurantSeeder.js
+3.新增種子資料 
+-終端機上執行 npm run seed
 - 確認 Robo 3T 資料已經建立了
 ```
 
@@ -55,6 +60,18 @@
 
 ##### 6. 使用者可以使用下拉式選單排序餐廳
 
+##### 7. 使用者可以使用臉書帳號登入
+
+##### 8. 使用者必須登入才能使用餐廳清單，如果沒登入，會被導向登入頁面
+
+##### 9. 使用者可以註冊帳號，註冊的資料包括：名字、email、密碼、確認密碼。其中 email 與密碼是必填欄位，但名字不是
+
+##### 10. 如果使用者已經註冊過、沒填寫必填欄位、或是密碼輸入錯誤，就註冊失敗，並回應給使用者錯誤訊息
+
+##### 11. 登入後，使用者可以建立並管理專屬他的一個餐廳清單
+
+##### 12. 使用者登出、註冊失敗、或登入失敗時，使用者都會在畫面上看到正確而清楚的系統訊息
+
 ## 截圖
 
 ###### 1.首頁
@@ -76,3 +93,11 @@
 ###### 5.新增排序功能
 
 ![image](./public/img/sorting.png)
+
+###### 6.新增登入頁面
+
+![image](./public/img/Login.png)
+
+###### 7.新增註冊頁面
+
+![image](./public/img/Register.png)
