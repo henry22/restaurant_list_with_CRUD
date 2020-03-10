@@ -51,6 +51,7 @@ require('./config/passport')(passport)
 app.use('/', require('./routes/home'))
 app.use('/restaurants', require('./routes/restaurant'))
 app.use('/users', require('./routes/user'))
+app.use('/auth', require('./routes/auths'))
 
 app.get('*', (req, res, next) => {
   res.render('error')
