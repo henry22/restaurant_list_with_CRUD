@@ -48,4 +48,8 @@ app.use('/', require('./routes/home'))
 app.use('/restaurants', require('./routes/restaurant'))
 app.use('/users', require('./routes/user'))
 
+app.get('*', (req, res, next) => {
+  res.render('error')
+});
+
 app.listen(port, () => console.log(`The server is listening on port:${port}`))
