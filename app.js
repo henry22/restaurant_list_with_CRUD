@@ -8,6 +8,10 @@ const methodOverride = require('method-override')
 const session = require('express-session')
 const passport = require('passport')
 
+if(process.env.NODE_ENV !== 'production') {
+  require('dotenv').config()
+}
+
 // Use mongoose to connect to the mongodb server
 mongoose.connect('mongodb://localhost/restaurant', { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
 mongoose.set('useCreateIndex', true)
